@@ -54,7 +54,7 @@ function renderBlogs(blogs) {
     div.className = 'blog-card';
     div.style.cursor = 'pointer';
     div.innerHTML = `
-      ${blog.image ? `<img src="http://localhost:5000/uploads/${blog.image}" alt="${blog.title}" style="max-width:100%;max-height:180px;object-fit:cover;border-radius:8px 8px 0 0;">` : ''}
+      ${blog.image ? `<img src="https://personal-blog-backend-production-6f7d.up.railway.app/uploads/${blog.image}" alt="${blog.title}" style="max-width:100%;max-height:180px;object-fit:cover;border-radius:8px 8px 0 0;">` : ''}
       <h3 class="h3">${blog.title}</h3>
       <p>${blog.excerpt}</p>
       <span style="color:var(--accent);text-decoration:underline;">Read more</span>
@@ -65,7 +65,7 @@ function renderBlogs(blogs) {
 }
 
 function fetchBlogs() {
-  fetch('http://localhost:5000/blogs')
+  fetch('https://personal-blog-backend-production-6f7d.up.railway.app/api/blogs')
     .then(res => res.json())
     .then(renderBlogs)
     .catch(() => {
@@ -75,14 +75,14 @@ function fetchBlogs() {
 }
 
 function openBlogDetail(id) {
-  fetch(`http://localhost:5000/blog/${id}`)
+  fetch(`https://personal-blog-backend-production-6f7d.up.railway.app/api/blog/${id}`)
     .then(res => res.json())
     .then(blog => {
       const modal = document.getElementById('blogDetailModal');
       const content = document.getElementById('blogDetailContent');
       let html = '';
       if (blog.image) {
-        html += `<img src="http://localhost:5000/uploads/${blog.image}" alt="${blog.title}" style="max-width:100%;max-height:300px;object-fit:cover;border-radius:8px;">`;
+        html += `<img src="https://personal-blog-backend-production-6f7d.up.railway.app/uploads/${blog.image}" alt="${blog.title}" style="max-width:100%;max-height:300px;object-fit:cover;border-radius:8px;">`;
       }
       html += `<h2 class='h2'>${blog.title}</h2>`;
       html += `<p style='white-space:pre-line;'>${blog.content}</p>`;
@@ -102,7 +102,7 @@ if (publishForm) {
   publishForm.onsubmit = function(e) {
     e.preventDefault();
     const formData = new FormData(publishForm);
-    fetch('http://localhost:5000/publish', {
+    fetch('https://personal-blog-backend-production-6f7d.up.railway.app/api/publish', {
       method: 'POST',
       body: formData
     })
